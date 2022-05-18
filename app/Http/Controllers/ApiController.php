@@ -28,7 +28,7 @@ class ApiController extends Controller
     public function myOrders(): \Illuminate\Http\JsonResponse
     {
         $orders = Order::with('order_items')
-            ->where('user_id', auth()->user()->id)
+//            ->where('user_id', auth()->user()->id)
             ->join('products', 'products.id', '=', 'orders.product_id')
             ->join('order_items', 'order_items.order_id', '=', 'orders.id')
             ->select('orders.id', 'orders.status', 'order_items.quantity', DB::raw('SUM(products.price * order_items.quantity) as total_price'))
